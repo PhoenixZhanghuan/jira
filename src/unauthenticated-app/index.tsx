@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { RegisterScreen } from './login';
-import { LoginScreen } from './register';
+import { LoginScreen } from './login';
+import { RegisterScreen } from './register';
 
 export const UnauthenticatedApp = () => {
     const [isRegister, setIsRegister] = useState(false);

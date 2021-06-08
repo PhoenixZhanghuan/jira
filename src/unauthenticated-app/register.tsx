@@ -1,7 +1,7 @@
 import { useAuth } from 'context/auth-context';
 import React from 'react';
 
-export const LoginScreen = () => {
+export const RegisterScreen = () => {
 
     const {register, user} = useAuth();
 
