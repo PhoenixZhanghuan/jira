@@ -57,7 +57,7 @@ export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defa
     }
 
     return {
-        idIdle: state.stat === 'idle',
+        isIdle: state.stat === 'idle',
         isLoading: state.stat === 'loading',
         isError: state.stat === 'error',
         isSuccess: state.stat === 'success',
