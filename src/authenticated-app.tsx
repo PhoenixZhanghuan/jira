@@ -20,7 +20,7 @@ export const AuthenticatedApp = () => {
                     <Dropdown overlay={
                     <Menu>
                         <Menu.Item key={'logout'}>
-                            <Button type={"link"}>登出</Button>
+                            <Button onClick={logout} type={"link"}>登出</Button>
                         </Menu.Item>
                     </Menu>}
                     >
