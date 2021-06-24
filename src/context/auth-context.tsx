@@ -1,9 +1,9 @@
 import React, {useState, ReactNode} from 'react';
 import * as auth from 'auth-provider';
 import {User} from "screens/project-list/search_panel";
-import { http } from 'screens/utils/http';
-import { useMount } from 'screens/utils';
-import { useAsync } from 'screens/utils/use-async';
+import { http } from 'utils/http';
+import { useMount } from 'utils';
+import { useAsync } from 'utils/use-async';
 import { FullPageLoading, FullPageErrorFallback } from 'components/lib';
 
 interface AuthForm {

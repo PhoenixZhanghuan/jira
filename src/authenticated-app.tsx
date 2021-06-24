@@ -8,7 +8,7 @@ import { Dropdown, Menu, Button } from 'antd';
 import {Navigate, Route, Routes} from 'react-router';
 import {BrowserRouter as Router} from 'react-router-dom';
 import { ProjectScreen } from 'screens/project';
-import { resetRoute } from 'screens/utils';
+import { resetRoute } from 'utils';
 
 export const AuthenticatedApp = () => {
     return (
