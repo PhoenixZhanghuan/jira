@@ -33,6 +33,21 @@ export const useDebounce = <V>(value: V, delay?: number) => {
     return debounceValue;
 }
 
+export const useArray = <T>(initialArray: T[]) => {
+    const [value, setValue] = useState(initialArray);
+    return {
+      value,
+      setValue,
+      add: (item: T) => setValue([...value, item]),
+      clear: () => setValue([]),
+      removeIndex: (index: number) => {
+        const copy = [...value];
+        copy.splice(index, 1);
+        setValue(copy);
+      },
+    };
+  };
+
 export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
     const oldTitle = useRef(document.title).current;
     
@@ -50,3 +65,36 @@ export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
 } 
 
 export const resetRoute = () => window.location.href = window.location.origin;
+
+/**
+ * 传入一个对象，和键集合，返回对应的对象中的键值对
+ * @param obj
+ * @param keys
+ */
+ export const subset = <
+ O extends { [key in string]: unknown },
+ K extends keyof O
+>(
+ obj: O,
+ keys: K[]
+) => {
+ const filteredEntries = Object.entries(obj).filter(([key]) =>
+   keys.includes(key as K)
+ );
+ return Object.fromEntries(filteredEntries) as Pick<O, K>;
+};
+
+/**
+ * 返回组件的挂载状态， 如果还没挂载或者已经卸载，返回false; 反之，返回true
+ */
+export const useMountedRef = () => {
+    const mountedRef = useRef(false);
+    useEffect(() => {
+        mountedRef.current = true;
+        return () => {
+            mountedRef.current = false;
+        }
+    })
+
+    return mountedRef;
+}
