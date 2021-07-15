@@ -1,11 +1,12 @@
 import React from "react";
 import { User } from "./search_panel";
-import { Table, TableProps } from "antd";
+import { Table, TableProps, Dropdown, Menu } from "antd";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { Pin } from "components/pin";
 import { render } from "@testing-library/react";
 import { useEditProject } from "utils/project";
+import { ButtonNoPadding } from "../../components/lib";
 
 export interface Project {
   id: number;
@@ -17,7 +18,8 @@ export interface Project {
 }
 interface ListProps extends TableProps<any> {
   users: User[];
-  refresh?: () => void
+  refresh?: () => void,
+  setProjectModalOpen: (isOpen: boolean) => void
 }
 export const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject();
@@ -72,6 +74,17 @@ export const List = ({ users, ...props }: ListProps) => {
             );
           },
         },
+        {
+          render(value,project) {
+            return <Dropdown overlay={<Menu>
+              <Menu.Item key={'edit'}>
+                <ButtonNoPadding type={"link"} onClick={() => props.setProjectModalOpen(true)}>编辑</ButtonNoPadding>
+              </Menu.Item>
+            </Menu>}>
+              <ButtonNoPadding type={"link"}>...</ButtonNoPadding>
+            </Dropdown>
+          }
+        }
       ]}
       {...props}
     />
