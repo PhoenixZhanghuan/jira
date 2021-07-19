@@ -11,20 +11,14 @@ import { ProjectScreen } from "screens/project";
 import { resetRoute } from "utils";
 import { ProjectModal } from "screens/project-list/project-modal";
 import { ProjectPopover } from "components/project-popover";
+import { projectListActions } from "./screens/project-list/project-list.slice";
+import { useDispatch } from "react-redux";
 
 export const AuthenticatedApp = () => {
-  const [projectModalOpen, setProjectModalOpen] = useState(false);
-
+  const dispatch = useDispatch();
   return (
     <Container>
-      <PageHeader projectButton={
-        <ButtonNoPadding
-          onClick={() => setProjectModalOpen(true)}
-          type={"link"}
-        >
-          创建项目
-        </ButtonNoPadding>
-      } />
+      <PageHeader />
       <Main>
         <Router>
           <Routes>
@@ -32,7 +26,7 @@ export const AuthenticatedApp = () => {
               <ProjectListScreen
                 projectButton={
                   <ButtonNoPadding
-                    onClick={() => setProjectModalOpen(true)}
+                    onClick={() => dispatch(projectListActions.openProjectModal())}
                     type={"link"}
                   >
                     创建项目
@@ -48,19 +42,19 @@ export const AuthenticatedApp = () => {
           </Routes>
         </Router>
       </Main>
-      <ProjectModal projectModalOpen={projectModalOpen} onClose={() => setProjectModalOpen(false)} />
+      <ProjectModal  />
     </Container>
   );
 };
 
-const PageHeader = (props: { projectButton: JSX.Element }) => {
+const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
         <ButtonNoPadding type={"link"} onClick={resetRoute}>
           <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255"} />
         </ButtonNoPadding>
-        <ProjectPopover {...props} />
+        <ProjectPopover />
         <span>用户</span>
       </HeaderLeft>
       <HeaderRight>
